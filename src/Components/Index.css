@@ -9,7 +9,10 @@
     box-shadow: 4px 4px 4px 3px black;
     padding-top: 70px;
 }
-
+.mainContent
+{
+    transition: margin-left 0.5s;
+}
 .hideSideBar
 {
     color: white;
