@@ -20,8 +20,8 @@ function Index()
     const showSideMenu=()=>
     {
         $('.sideMenu').css('width', '250px')
-        $('.sideMenu').css('marginLeft', '250px')  
-        
+        $('.mainContent').css('marginLeft', '250px')
+
         $('body').css('backgroundColor', ' rgba(170, 0, 255, 0.6)')
 
     }
@@ -30,6 +30,8 @@ function Index()
     {
         $('.sideMenu').css('width', '0px')
         $('.sideMenu').css('marginLeft', '0px')
+        $('.mainContent').css('marginLeft', '0px')
+        
 
         $('body').css('backgroundColor', 'rgba(170, 0, 255, 1)')
 
