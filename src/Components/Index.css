@@ -9,6 +9,7 @@
     box-shadow: 4px 4px 4px 3px black;
     padding-top: 70px;
 }
+
 .hideSideBar
 {
     color: white;
@@ -49,12 +50,32 @@
     width: 70%;
     margin-left: 15%;
     color: white;
+    box-shadow: 10px 10px 10px black;
+    opacity: 0.9;
+    transition: ease-in 0.6s;
+    background-color: rgb(177, 20, 255);
+    transition: 0.6s linear;
+}
+.foodList:hover
+{   
+   filter: drop-shadow(10px 10px 10px black);
+   opacity: 1;
+   transition: 0.6s linear;
+
+}
+.goToCartPage
+{
+    font-size: 25px;
+    padding: 0px;
+    transition: linear 0.8s;
 }
 img
 {
     max-width: 50%;
     max-height: 50%;
+   
 }
+
 body
 {
     background-color: rgb(170, 0, 255);
