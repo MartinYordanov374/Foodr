@@ -1,0 +1,17 @@
+
+.showSideNavButton
+{
+    color: white;
+    font-size: 25px;
+}
+.sideNavMenu
+{
+    width: 0;
+    height: 100%;
+    background-color: rgb(255, 205, 4);
+    transition: linear 0.5s;
+    overflow-x: hidden;
+    position: fixed;
+    box-shadow: 4px 4px 4px 3px black;
+    padding-top: 70px;
+}
