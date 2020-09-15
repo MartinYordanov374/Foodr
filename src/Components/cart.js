@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Navbar, Nav, Button} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
@@ -6,13 +6,16 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 import {MdLineWeight, MdClear, MdHome, MdInfo, MdPhone} from 'react-icons/md'
 import './cart.css'
 import $ from 'jquery'
-function cart() {
+function Cart() {
+    
+    const[products, setProducts] = useState([]);
+
     const showSideNav =()=>
     {
         $('.sideNavMenu').css('width', '250px')
         $('.mainContent').css('marginLeft', '250px')
         $('.mainContent').css('opacity', '0.6')
-
+        
 
     }
     const hideSideNav =()=>
@@ -23,6 +26,10 @@ function cart() {
 
 
     }
+    useEffect(()=>{
+        const productsInCart = JSON.parse(localStorage.getItem('productsInCart'))
+        setProducts(productsInCart)
+    }, [])
     return (
         <div>
             <div className='sideNavMenu'>
@@ -63,10 +70,22 @@ function cart() {
                         </span>
                     </Nav>
                 </Navbar>
+                <div className='products'>
+                    
+                    {products.map(product=>
+                        <div className='product' key = {product.id}>
+                            
+                            <strong>{product.item}</strong>
+                            <Button variant='danger' className='removeProductButton'><strong><MdClear></MdClear>Remove this product</strong></Button>
+                        </div>)}
+                </div>
             </div>
             
         </div>
+
     );
+
 }
 
-export default cart;
+
+export default Cart;
