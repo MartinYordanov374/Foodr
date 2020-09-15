@@ -11,12 +11,16 @@ function cart() {
     {
         $('.sideNavMenu').css('width', '250px')
         $('.mainContent').css('marginLeft', '250px')
+        $('.mainContent').css('opacity', '0.6')
+
 
     }
     const hideSideNav =()=>
     {
         $('.sideNavMenu').css('width', '0px')
         $('.mainContent').css('marginLeft', '0px')
+        $('.mainContent').css('opacity', '1')
+
 
     }
     return (
