@@ -3,46 +3,63 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {Navbar, Nav, Button} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
-import {MdLineWeight, MdClear} from 'react-icons/md'
+import {MdLineWeight, MdClear, MdHome, MdInfo, MdPhone} from 'react-icons/md'
 import './cart.css'
 import $ from 'jquery'
 function cart() {
     const showSideNav =()=>
     {
         $('.sideNavMenu').css('width', '250px')
+        $('.mainContent').css('marginLeft', '250px')
+
+    }
+    const hideSideNav =()=>
+    {
+        $('.sideNavMenu').css('width', '0px')
+        $('.mainContent').css('marginLeft', '0px')
+
     }
     return (
         <div>
             <div className='sideNavMenu'>
-                <span>
+                <span onClick={hideSideNav} className='hideSideNavButton'>
                     <MdClear></MdClear>
                 </span>
-                <h3>How can we help you?</h3>
+                <h3 className='sideNavHeading'>How can we help you?</h3>
 
-                <LinkContainer to='/home'>
+                <LinkContainer className='sideNavLink' to='/home'>
                     <Nav.Link>
-                        Home
+                        <MdHome></MdHome> Home
                     </Nav.Link>
                 </LinkContainer>
-                <LinkContainer to='/home'>
+                <br></br>
+                <br></br>
+                <LinkContainer className='sideNavLink' to='/home'>
                     <Nav.Link>
-                        About us
+                        <MdInfo></MdInfo> About us
                     </Nav.Link>
                 </LinkContainer>
-                <LinkContainer to='/home'>
+                <br></br>
+                <br></br>
+
+                <LinkContainer className='sideNavLink' to='/home'>
                     <Nav.Link>
-                        Contact us
+                        <MdPhone></MdPhone> Contact us
                     </Nav.Link>
                 </LinkContainer>
             </div>
-            <Navbar variant='dark'>
-                <Navbar.Brand>Test</Navbar.Brand>
-                <Nav className='ml-auto'>
-                    <span className='showSideNavButton' onClick={showSideNav}>
-                        <MdLineWeight></MdLineWeight>
-                    </span>
-                </Nav>
-            </Navbar>
+            <div className='mainContent'>
+
+            
+                <Navbar variant='dark'>
+                    <Navbar.Brand>Your Cart</Navbar.Brand>
+                    <Nav className='ml-auto'>
+                        <span className='showSideNavButton' onClick={showSideNav}>
+                            <MdLineWeight></MdLineWeight>
+                        </span>
+                    </Nav>
+                </Navbar>
+            </div>
             
         </div>
     );
