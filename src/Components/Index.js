@@ -1,92 +1,118 @@
-.sideMenu
-{
-    width: 0;
-    height: 100%;
-    background-color: rgb(255, 205, 4);
-    transition: linear 0.5s;
-    overflow-x: hidden;
-    position: fixed;
-    box-shadow: 4px 4px 4px 3px black;
-}
-.mainContent
-{
-    transition: margin-left 0.5s;
-}
-.hideSideBar
-{
-    color: white;
-    margin-left: 200px;
-    border-radius: 10px;
-    font-size: 25px;
-}
-.showSideBar
-{
-    color: white;
-    font-size: 25px;
-}
-.sideMenuTitle
-{
-    color: rgba(255, 255, 255, 0.775);
-    text-shadow: 0px 0px 20px  black;
-    font-size: 25px;
-}
-.sideLink
-{
-    color: white;
-    position: absolute;
-    filter: drop-shadow(10px 10px 10px black);
-    font-size: 25px;
-    transition: linear 0.6s;
-}
-.sideLink:hover
-{
-    color: gray;
-    position: absolute;
-    filter: drop-shadow(10px 10px 10px black);
-    font-size: 25px;
-    transition: linear 0.6s;
+import React, {useState, useRef, useEffect} from 'react';
+import {Navbar, Nav, Button} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {Link} from 'react-router-dom'
+import {LinkContainer} from 'react-router-bootstrap'
+import {MdShoppingCart,MdClear, MdLineWeight, MdPhone, MdInfo} from 'react-icons/md'
+import $ from 'jquery'
+import './Index.css'
+import Burger from './Images/Burger.png'
+import Pizza from './Images/Pizza.png'
 
-}
-.foodList
+function Index()
 {
+    
 
-    width: 70%;
-    margin-left: 15%;
-    margin-bottom: 20px;
-    color: white;
-    box-shadow: 10px 10px 10px black;
-    opacity: 0.9;
-    transition: ease-in 0.6s;
-    background-color: rgb(177, 20, 255);
-    transition: 0.6s linear;
+    const[product, setProduct] = useState([])
+    const buyBurger = useRef()
+    const buyPizza = useRef()
 
-}
-.foodList:hover
-{   
-   filter: drop-shadow(10px 10px 10px black);
-   opacity: 1;
-   transition: 0.6s linear;
+    const showSideMenu=()=>
+    {
+        $('.sideMenu').css('width', '250px')
+        $('.mainContent').css('marginLeft', '250px')
 
-}
-.goToCartPage
-{
-    font-size: 25px;
-    padding: 0px;
-    transition: linear 0.8s;
-}
-.purchaseButton
-{
-    margin-bottom: 15px;
-}
-img
-{
-    max-width: 50%;
-    max-height: 50%;
+        $('body').css('backgroundColor', ' rgba(170, 0, 255, 0.6)')
+
+    }
+
+    const hideSideMenu=()=>
+    {
+        $('.sideMenu').css('width', '0px')
+        $('.sideMenu').css('marginLeft', '0px')
+        $('.mainContent').css('marginLeft', '0px')
+        
+
+        $('body').css('backgroundColor', 'rgba(170, 0, 255, 1)')
+
+    }
+    const purchaseBurger=()=>
+    {
+        let burgerText = document.getElementById('burgerTitle')
+        setProduct([...product,{
+            id: product.length,
+            item: burgerText.innerHTML
+        }])
+    }
+    const purchasePizza=()=>
+    {
+        let pizzaText = document.getElementById('pizzaTitle')
+        setProduct([...product,{
+            id: product.length,
+            item: pizzaText.innerText
+        }])
+    }
+    useEffect(()=>{
+        localStorage.setItem('productsInCart', JSON.stringify(product))
+    }, [product])
+
+
    
-}
+    return(
+        <div>
+             <div className='sideMenu'>
+                <span className='hideSideBar'onClick={hideSideMenu}>
+                    <MdClear></MdClear>
+                </span>
+                <h3 className='sideMenuTitle'>How can we help you?</h3>
+                <LinkContainer to='/about'>
+                    <Nav.Link className='sideLink'><MdInfo></MdInfo> About us</Nav.Link>
+                </LinkContainer>
+                <br></br>
+                <br></br>
 
-body
-{
-    background-color: rgb(177, 43, 243);
-    transition: linear 0.5s; 
+                <LinkContainer to='/'>
+                    <Nav.Link className='sideLink'><MdPhone></MdPhone> Contact Us</Nav.Link>
+                </LinkContainer>
+            </div>
+            <div className='mainContent'>
+                <Navbar variant='dark' bg=''>
+                    <Navbar.Brand>Home</Navbar.Brand>
+                        
+                        <Nav className='ml-auto'>
+                            <LinkContainer to='/cart' className='goToCartPage'>
+                                <Nav.Link>
+                                    <MdShoppingCart></MdShoppingCart>
+                                </Nav.Link>
+                            </LinkContainer>
+                            <span className='showSideBar' onClick={showSideMenu}>
+                                <MdLineWeight></MdLineWeight>
+                            </span>
+                            
+                        </Nav>
+
+                </Navbar>
+                <div className='foodList'>
+                    <div className='Burger'>
+                        <img src={Burger}  id='burger'></img>
+                    </div>
+                    <h3  ref={buyBurger} className='burgetTitle' id='burgerTitle'>Burger</h3>
+                    <h4><strong>$ 16.00</strong></h4>
+                    <Button variant='warning' className ='purchaseButton' onClick={purchaseBurger}><strong><MdShoppingCart></MdShoppingCart> Purchase now</strong></Button>
+                    
+                </div>
+                <br></br>
+                <div className='foodList'>
+                    <div className='Burger'>
+                        <img src={Pizza} ref={buyPizza} id='pizza'></img>
+                    </div>
+                    <h3 ref={buyPizza} className='pizzaTitle' id='pizzaTitle'>Pizza</h3>
+                    <h4><strong>$ 20.00</strong></h4>
+                    <Button variant='warning'className ='purchaseButton' onClick={purchasePizza}><strong><MdShoppingCart></MdShoppingCart> Purchase now</strong></Button>
+                    
+                </div>
+            </div>
+        </div>
+    )
 }
+export default Index;
