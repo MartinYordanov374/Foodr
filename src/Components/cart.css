@@ -13,5 +13,32 @@
     overflow-x: hidden;
     position: fixed;
     box-shadow: 4px 4px 4px 3px black;
-    padding-top: 70px;
+}
+.sideNavHeading
+{
+    color: white;   
+    filter: drop-shadow(10px 10px 10px black)
+}
+.sideNavLink
+{
+    color: white;
+    position: absolute;
+    filter: drop-shadow(10px 10px 10px black);
+    font-size: 25px;
+    transition: linear 0.6s;
+}
+.sideNavLink:hover
+{
+    color: gray;
+    position: absolute;
+    filter: drop-shadow(10px 10px 10px black);
+    font-size: 25px;
+    transition: linear 0.6s;
+
+}
+.hideSideNavButton
+{
+    color: white;
+    font-size: 25px;
+    margin-left: 190px;
 }
