@@ -5,6 +5,8 @@ import {LinkContainer} from 'react-router-bootstrap'
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 import {MdLineWeight, MdClear, MdHome, MdInfo, MdPhone} from 'react-icons/md'
 import './cart.css'
+import Burger from './Images/Burger.png'
+import Pizza from './Images/Pizza.png'
 import $ from 'jquery'
 function Cart() {
     
@@ -25,6 +27,17 @@ function Cart() {
         $('.mainContent').css('opacity', '1')
 
 
+    }
+    const checkName = ()=>
+    {
+        if($('.productName').text()==='Pizza')
+        {
+            $('.productImage').attr('src','/static/media/Pizza.07b5b3c1.png')
+        }
+        if($('.productName').text()==='Burger')
+        {
+            $('.productImage').attr('src','/static/media/Burger.bcd6f0a3.png')
+        }
     }
     useEffect(()=>{
         const productsInCart = JSON.parse(localStorage.getItem('productsInCart'))
@@ -70,14 +83,18 @@ function Cart() {
                         </span>
                     </Nav>
                 </Navbar>
-                <div className='products'>
+                <div className='products' onLoad={checkName}>
                     
                     {products.map(product=>
+                        
                         <div className='product' key = {product.id}>
                             
-                            <strong>{product.item}</strong>
-                            <Button variant='danger' className='removeProductButton'><strong><MdClear></MdClear>Remove this product</strong></Button>
-                        </div>)}
+                            <strong className='productName'>{product.item}</strong>
+                            <img src={Burger} className='productImage'></img>
+                            <Button variant='danger' id='removeProductButton' className='removeProductButton'><strong><MdClear></MdClear>Remove this product</strong></Button>
+                            
+                        </div>)
+                        }
                 </div>
             </div>
             
