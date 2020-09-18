@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {Navbar, Nav, Button} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
-import {MdLineWeight, MdClear, MdHome, MdInfo, MdPhone} from 'react-icons/md'
+import {MdLineWeight, MdClear, MdHome, MdInfo, MdPhone,MdCheck} from 'react-icons/md'
 import './cart.css'
 import Burger from './Images/Burger.png'
 import Pizza from './Images/Pizza.png'
@@ -111,12 +111,12 @@ function Cart() {
                             <span className='showPrice'>0.00</span>
                         </div>)
                         }
-                     <Button variant='danger' id='removeProductButton' className='removeProductButton' onClick={removeItem}>
+                     <Button variant='success' id='removeProductButton' className='removeProductButton' onClick={removeItem}>
                          <span>
                              <strong>
-                                    <MdClear>
-                                    </MdClear>
-                                        Clear your cart
+                                    <MdCheck>
+                                    </MdCheck>
+                                        Finish your order
                              </strong>
                            </span>
                     </Button>
