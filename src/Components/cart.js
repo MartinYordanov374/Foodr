@@ -101,17 +101,18 @@ function Cart() {
                             <strong className='productName'>{product.item}</strong>
                             
                             <img src={Burger} className='productImage'></img>
-                            <Button variant='danger' id='removeProductButton' className='removeProductButton' onClick={removeItem}>
-                                <span>
-                                    <strong>
-                                        <MdClear>
-                                        </MdClear>
-                                        Remove this product
-                                    </strong>
-                                </span>
-                            </Button>
+                           
                         </div>)
                         }
+                     <Button variant='danger' id='removeProductButton' className='removeProductButton' onClick={removeItem}>
+                         <span>
+                             <strong>
+                                    <MdClear>
+                                    </MdClear>
+                                        Clear your cart
+                             </strong>
+                           </span>
+                    </Button>
                 </div>
             </div>
             
