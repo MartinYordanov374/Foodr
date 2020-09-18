@@ -40,7 +40,7 @@ function Cart() {
         }
     }
     useEffect(()=>{
-        const productsInCart = JSON.parse(localStorage.getItem('productsInCart'))
+        const productsInCart = JSON.parse(sessionStorage.getItem('productsInCart'))
         setProducts(productsInCart)
     }, [])
     return (
@@ -90,6 +90,7 @@ function Cart() {
                         <div className='product' key = {product.id}>
                             
                             <strong className='productName'>{product.item}</strong>
+                            
                             <img src={Burger} className='productImage'></img>
                             <Button variant='danger' id='removeProductButton' className='removeProductButton'><strong><MdClear></MdClear>Remove this product</strong></Button>
                             
