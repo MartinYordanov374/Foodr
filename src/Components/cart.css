@@ -14,7 +14,6 @@ body
     background-color: rgb(255, 205, 4);
     transition: linear 0.5s;
     overflow-x: hidden;
-    display: grid;
     position: fixed;
     box-shadow: 4px 4px 4px 3px black;
 }
@@ -50,20 +49,36 @@ body
 {
     background-color: white;
     width: 80%;
-    display: grid;
     margin-left: 10%;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0px 15px 25px rgb(126, 25, 177);
+    display: grid;
+}
+
+.product .productName
+{
+    font-size: 36px;
 }
 .product .productImage
 {
+    margin-left: 37%;
+    filter: drop-shadow(0px 5px 15px black);
     margin-top: 20px;
-    margin-left: 36%;
+    transition: linear 0.6s;   
 
 }
-.product .removeProductButton
+.product .productImage:hover
 {
-    width: 50%;
-    margin-left: 25%;   
+    margin-left: 37%;
+    filter: drop-shadow(0px 5px 25px black);
+    margin-top: 20px;
+    transition: linear 0.6s;   
+}
+.removeProductButton
+{
+    width: 80%;
+ 
+    
 }
 
