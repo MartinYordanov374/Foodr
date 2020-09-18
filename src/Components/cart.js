@@ -39,6 +39,16 @@ function Cart() {
             $('.productImage').attr('src','/static/media/Burger.bcd6f0a3.png')
         }
     }
+    const removeItem=()=>
+    {
+        alert('cleared')
+        sessionStorage.clear()
+        if(sessionStorage.length === 0)
+        {
+          window.open('/home')
+          alert('CLEAR')
+        }
+    }
     useEffect(()=>{
         const productsInCart = JSON.parse(sessionStorage.getItem('productsInCart'))
         setProducts(productsInCart)
@@ -92,7 +102,7 @@ function Cart() {
                             <strong className='productName'>{product.item}</strong>
                             
                             <img src={Burger} className='productImage'></img>
-                            <Button variant='danger' id='removeProductButton' className='removeProductButton'><strong><MdClear></MdClear>Remove this product</strong></Button>
+                            <span variant='danger' id='removeProductButton' className='removeProductButton' onClick={removeItem}><strong><MdClear></MdClear></strong></span>
                             
                         </div>)
                         }
