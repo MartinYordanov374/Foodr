@@ -41,12 +41,11 @@ function Cart() {
     }
     const removeItem=()=>
     {
-        alert('cleared')
         sessionStorage.clear()
         if(sessionStorage.length === 0)
         {
+          window.close()
           window.open('/home')
-          alert('CLEAR')
         }
     }
     useEffect(()=>{
@@ -102,8 +101,15 @@ function Cart() {
                             <strong className='productName'>{product.item}</strong>
                             
                             <img src={Burger} className='productImage'></img>
-                            <span variant='danger' id='removeProductButton' className='removeProductButton' onClick={removeItem}><strong><MdClear></MdClear></strong></span>
-                            
+                            <Button variant='danger' id='removeProductButton' className='removeProductButton' onClick={removeItem}>
+                                <span>
+                                    <strong>
+                                        <MdClear>
+                                        </MdClear>
+                                        Remove this product
+                                    </strong>
+                                </span>
+                            </Button>
                         </div>)
                         }
                 </div>
