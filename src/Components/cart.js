@@ -9,7 +9,6 @@ import Burger from './Images/Burger.png'
 import Pizza from './Images/Pizza.png'
 import $ from 'jquery'
 function Cart() {
-    
     const[products, setProducts] = useState([]);
 
     const showSideNav =()=>
@@ -46,6 +45,17 @@ function Cart() {
         {
           window.close()
           window.open('/home')
+        }
+    }
+    const showPrice=()=>
+    {
+        if($('.productName').text('Pizza'))
+        {
+            $('.showPrice').text('$20.00')
+        }
+        if($('.productName').text('Burger'))
+        {
+            $('.showPrice').text()
         }
     }
     useEffect(()=>{
@@ -95,13 +105,10 @@ function Cart() {
                 <div className='products' onLoad={checkName}>
                     
                     {products.map(product=>
-                        
-                        <div className='product' key = {product.id}>
-                            
+                        <div className='product' onLoad={showPrice} key={product.id}>
                             <strong className='productName'>{product.item}</strong>
-                            
                             <img src={Burger} className='productImage'></img>
-                           
+                            <span className='showPrice'>0.00</span>
                         </div>)
                         }
                      <Button variant='danger' id='removeProductButton' className='removeProductButton' onClick={removeItem}>
