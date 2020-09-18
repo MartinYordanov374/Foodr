@@ -53,7 +53,7 @@ function Index()
         }])
     }
     useEffect(()=>{
-        localStorage.setItem('productsInCart', JSON.stringify(product))
+        sessionStorage.setItem('productsInCart', JSON.stringify(product))
     }, [product])
 
 
