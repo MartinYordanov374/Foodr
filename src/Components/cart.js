@@ -49,13 +49,13 @@ function Cart() {
     }
     const showPrice=()=>
     {
-        if($('.productName').text('Pizza'))
+        if($('.productName').text()==='Pizza')
         {
             $('.showPrice').text('$20.00')
         }
-        if($('.productName').text('Burger'))
+        if($('.productName').text()==='Burger')
         {
-            $('.showPrice').text()
+            $('.showPrice').text('$16.00')
         }
     }
     useEffect(()=>{
