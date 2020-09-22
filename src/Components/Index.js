@@ -51,6 +51,19 @@ function Index()
         localStorage.setItem('products', JSON.stringify(product))
         
     }
+    const removeItem=()=>
+    {
+
+            product.pop()
+            if(product.length<=0)
+            {
+                $('.yourCart').hide()
+            }
+
+ 
+        
+        
+    }
 
     return(
         <div>
@@ -68,6 +81,21 @@ function Index()
                 <LinkContainer to='/'>
                     <Nav.Link className='sideLink'><MdPhone></MdPhone> Contact Us</Nav.Link>
                 </LinkContainer>
+                <div>
+                    <div>
+                    
+                    {product.map((item, idx)=>
+                    <div className='yourCart' key={idx}>
+                        <hr></hr>
+
+                        <img src ={item.image}></img>
+                        <h3 className='burgerTitle'>{item.name}</h3>
+                        <h4><strong>$ {item.price}.00</strong></h4>
+                        <Button variant='warning' onClick={()=>removeItem(idx)}>Remove</Button>
+                        <br></br>
+                  </div>)}
+                    </div>
+                </div>
             </div>
             <div className='mainContent'>
                 <Navbar variant='dark' bg=''>
