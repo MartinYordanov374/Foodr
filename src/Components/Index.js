@@ -51,18 +51,13 @@ function Index()
         localStorage.setItem('products', JSON.stringify(product))
         
     }
-    const removeItem=()=>
+    const removeItem=(idx)=>
     {
+        let x = product.filter(item=>item.id != idx)
+        setProduct([product, x])
+        $('.removeButton').remove()
+        $('.yourCart').hide()
 
-            product.pop()
-            if(product.length<=0)
-            {
-                $('.yourCart').hide()
-            }
-
- 
-        
-        
     }
 
     return(
@@ -87,11 +82,12 @@ function Index()
                     {product.map((item, idx)=>
                     <div className='yourCart' key={idx}>
                         <hr></hr>
-
-                        <img src ={item.image}></img>
-                        <h3 className='burgerTitle'>{item.name}</h3>
-                        <h4><strong>$ {item.price}.00</strong></h4>
-                        <Button variant='warning' onClick={()=>removeItem(idx)}>Remove</Button>
+                        <div className={idx}>
+                            <img src ={item.image}></img>
+                            <h3 className='burgerTitle'>{item.name}</h3>
+                            <h4><strong>$ {item.price}.00</strong></h4>
+                            <Button variant='warning' className='removeButton' onClick={()=>removeItem(idx)}>Remove</Button>
+                        </div>
                         <br></br>
                   </div>)}
                     </div>
@@ -118,7 +114,7 @@ function Index()
                         <img src ={item.image}></img>
                         <h3 className='burgerTitle'>{item.name}</h3>
                         <h4><strong>$ {item.price}.00</strong></h4>
-                        <Button variant='warning'className ='purchaseButton' onClick={()=>addToCart(item)} key={idx} ><strong><MdShoppingCart></MdShoppingCart>Add to cart</strong></Button>
+                        <Button variant='warning' className ='purchaseButton' onClick={()=>addToCart(item)} key={idx} ><strong><MdShoppingCart></MdShoppingCart>Add to cart</strong></Button>
                         <br></br>
                   </div>)}
                 </div>
