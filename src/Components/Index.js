@@ -1,21 +1,30 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {Navbar, Nav, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Link} from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap'
 import {MdShoppingCart,MdClear, MdLineWeight, MdPhone, MdInfo} from 'react-icons/md'
 import $ from 'jquery'
 import './Index.css'
+
 import Burger from './Images/Burger.png'
 import Pizza from './Images/Pizza.png'
 
 function Index()
 {
     
-
     const[product, setProduct] = useState([])
-    const buyBurger = useRef()
-    const buyPizza = useRef()
+    const[item] = useState([{
+        name: 'Burger',
+        image: '/static/media/Burger.bcd6f0a3.png',
+        id: 0,
+        price: 16.00
+    },
+    {
+        name: 'Pizza',
+        image: '/static/media/Pizza.07b5b3c1.png',
+        id: 1,
+        price: 20.00
+    }])
 
     const showSideMenu=()=>
     {
@@ -36,28 +45,14 @@ function Index()
         $('body').css('backgroundColor', 'rgba(170, 0, 255, 1)')
 
     }
-    const purchaseBurger=()=>
+    const addToCart=(item)=>
     {
-        let burgerText = document.getElementById('burgerTitle')
-        setProduct([...product,{
-            id: product.length,
-            item: burgerText.innerHTML
-        }])
+        setProduct([...product, item])
+        alert(product.length)
+        localStorage.setItem('products', JSON.stringify(product))
+        
     }
-    const purchasePizza=()=>
-    {
-        let pizzaText = document.getElementById('pizzaTitle')
-        setProduct([...product,{
-            id: product.length,
-            item: pizzaText.innerText
-        }])
-    }
-    useEffect(()=>{
-        sessionStorage.setItem('productsInCart', JSON.stringify(product))
-    }, [product])
 
-
-   
     return(
         <div>
              <div className='sideMenu'>
@@ -87,32 +82,23 @@ function Index()
                             </LinkContainer>
                             <span className='showSideBar' onClick={showSideMenu}>
                                 <MdLineWeight></MdLineWeight>
-                            </span>
-                            
+                            </span>       
                         </Nav>
-
                 </Navbar>
                 <div className='foodList'>
-                    <div className='Burger'>
-                        <img src={Burger}  id='burger'></img>
-                    </div>
-                    <h3  ref={buyBurger} className='burgetTitle' id='burgerTitle'>Burger</h3>
-                    <h4><strong>$ 16.00</strong></h4>
-                    <Button variant='warning' className ='purchaseButton' onClick={purchaseBurger}><strong><MdShoppingCart></MdShoppingCart> Purchase now</strong></Button>
-                    
+                  {item.map((item, idx)=>
+                  <div className={item.name} key={idx}>
+                        <img src ={item.image}></img>
+                        <h3 className='burgerTitle'>{item.name}</h3>
+                        <h4><strong>$ {item.price}.00</strong></h4>
+                        <Button variant='warning'className ='purchaseButton' onClick={()=>addToCart(item)} key={idx} ><strong><MdShoppingCart></MdShoppingCart>Add to cart</strong></Button>
+                        <br></br>
+                  </div>)}
                 </div>
-                <br></br>
-                <div className='foodList'>
-                    <div className='Burger'>
-                        <img src={Pizza} ref={buyPizza} id='pizza'></img>
-                    </div>
-                    <h3 ref={buyPizza} className='pizzaTitle' id='pizzaTitle'>Pizza</h3>
-                    <h4><strong>$ 20.00</strong></h4>
-                    <Button variant='warning'className ='purchaseButton' onClick={purchasePizza}><strong><MdShoppingCart></MdShoppingCart> Purchase now</strong></Button>
-                    
-                </div>
+               
             </div>
         </div>
+        
     )
 }
 export default Index;
