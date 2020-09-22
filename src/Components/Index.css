@@ -32,19 +32,20 @@
 }
 .sideLink
 {
+    color: white;
     position: absolute;
-    color: rgba(255, 255, 255, 0.775);
-    transition: linear 0.6s;
-    text-shadow: 0px 0px 20px  black;
-
+    filter: drop-shadow(10px 10px 10px black);
     font-size: 25px;
-
+    transition: linear 0.6s;
 }
 .sideLink:hover
 {
-    position: absolute;
     color: gray;
+    position: absolute;
+    filter: drop-shadow(10px 10px 10px black);
+    font-size: 25px;
     transition: linear 0.6s;
+
 }
 .foodList
 {
@@ -76,6 +77,11 @@
 .purchaseButton
 {
     margin-bottom: 15px;
+}
+.yourCart
+{
+    margin-top: 55px;
+    background-color: rgba(255, 255, 169,0.6);
 }
 img
 {
