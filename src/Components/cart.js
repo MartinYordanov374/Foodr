@@ -36,10 +36,7 @@ function Cart() {
                 setProducts([...products, x])
 
             }
-            else
-            {
-                alert('you fked up')
-            }
+
     }
 
 
