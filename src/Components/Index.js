@@ -48,7 +48,6 @@ function Index()
     const addToCart=(item)=>
     {
         setProduct([...product, item])
-        alert(product.length)
         localStorage.setItem('products', JSON.stringify(product))
         
     }
