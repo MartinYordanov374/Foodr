@@ -5,11 +5,13 @@ import {LinkContainer} from 'react-router-bootstrap'
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 import {MdLineWeight, MdClear, MdHome, MdInfo, MdPhone,MdCheck} from 'react-icons/md'
 import './cart.css'
-import Burger from './Images/Burger.png'
-import Pizza from './Images/Pizza.png'
 import $ from 'jquery'
+import item from './Index'
 function Cart() {
     const[products, setProducts] = useState([]);
+    let x = JSON.parse(localStorage.getItem('products'))
+    let counter = x.length
+    let buttonProductsCounter = x.length
 
     const showSideNav =()=>
     {
@@ -27,43 +29,22 @@ function Cart() {
 
 
     }
-    const checkName = ()=>
-    {
-        if($('.productName').text()==='Pizza')
-        {
-            $('.productImage').attr('src','/static/media/Pizza.07b5b3c1.png')
-        }
-        if($('.productName').text()==='Burger')
-        {
-            $('.productImage').attr('src','/static/media/Burger.bcd6f0a3.png')
-        }
+    const getItems=()=>{
+            counter-=1
+            if(counter<=x.length)
+            {
+                setProducts([...products, x])
+
+            }
+            else
+            {
+                alert('you fked up')
+            }
     }
-    const removeItem=()=>
-    {
-        sessionStorage.clear()
-        if(sessionStorage.length === 0)
-        {
-          window.close()
-          window.open('/home')
-        }
-    }
-    const showPrice=()=>
-    {
-        if($('.productName').text()==='Pizza')
-        {
-            $('.showPrice').text('$20.00')
-        }
-        if($('.productName').text()==='Burger')
-        {
-            $('.showPrice').text('$16.00')
-        }
-    }
-    useEffect(()=>{
-        const productsInCart = JSON.parse(sessionStorage.getItem('productsInCart'))
-        setProducts(productsInCart)
-    }, [])
+
+
     return (
-        <div>
+        <div >
             <div className='sideNavMenu'>
                 <span onClick={hideSideNav} className='hideSideNavButton'>
                     <MdClear></MdClear>
@@ -93,7 +74,6 @@ function Cart() {
             </div>
             <div className='mainContent'>
 
-            
                 <Navbar variant='dark'>
                     <Navbar.Brand>Your Cart</Navbar.Brand>
                     <Nav className='ml-auto'>
@@ -102,16 +82,19 @@ function Cart() {
                         </span>
                     </Nav>
                 </Navbar>
-                <div className='products' onLoad={checkName}>
+                <div className='products'>   
+                        <div>
+                            <Button onClick={getItems}> Show items in the cart ( {buttonProductsCounter} left to show )</Button>
+                            {products.map((product, index)=>(
+                                <div className='product'key={index}>
+                                    <h2 className='productName'>{product[index].name}</h2>
+                                    <img className = 'productImage' src={product[index].image}></img>
+                                    <h2>${product[index].price}.00</h2>
+                                </div>
+                            ))}
+                        </div>
                     
-                    {products.map(product=>
-                        <div className='product' onLoad={showPrice} key={product.id}>
-                            <strong className='productName'>{product.item}</strong>
-                            <img src={Burger} className='productImage'></img>
-                            <span className='showPrice'>0.00</span>
-                        </div>)
-                        }
-                     <Button variant='success' id='removeProductButton' className='removeProductButton' onClick={removeItem}>
+                     <Button variant='success' id='removeProductButton' className='removeProductButton' >
                          <span>
                              <strong>
                                     <MdCheck>
@@ -122,9 +105,7 @@ function Cart() {
                     </Button>
                 </div>
             </div>
-            
         </div>
-
     );
 
 }
