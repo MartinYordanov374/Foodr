@@ -6,13 +6,10 @@ import {MdShoppingCart,MdClear, MdLineWeight, MdPhone, MdInfo} from 'react-icons
 import $ from 'jquery'
 import './Index.css'
 
-import Burger from './Images/Burger.png'
-import Pizza from './Images/Pizza.png'
-
 function Index()
 {
     
-    const[product, setProduct] = useState([])
+    let[product, setProduct] = useState([])
     const[item] = useState([{
         name: 'Burger',
         image: '/static/media/Burger.bcd6f0a3.png',
@@ -40,25 +37,26 @@ function Index()
         $('.sideMenu').css('width', '0px')
         $('.sideMenu').css('marginLeft', '0px')
         $('.mainContent').css('marginLeft', '0px')
-        
-
         $('body').css('backgroundColor', 'rgba(170, 0, 255, 1)')
 
     }
     const addToCart=(item)=>
     {
+        $('.showItems').text(product.length+1)
         setProduct([...product, item])
         localStorage.setItem('products', JSON.stringify(product))
         
     }
-    const removeItem=(idx)=>
+    const removeItem=()=>
     {
-        let x = product.filter(item=>item.id != idx)
-        setProduct([product, x])
-        $('.removeButton').remove()
+        product = []
         $('.yourCart').hide()
+        $('.showItems').text(product.length)
+
+
 
     }
+
 
     return(
         <div>
@@ -77,8 +75,11 @@ function Index()
                     <Nav.Link className='sideLink'><MdPhone></MdPhone> Contact Us</Nav.Link>
                 </LinkContainer>
                 <div>
-                    <div>
                     
+                    <div>
+                    <h3 className='sideMenuCart'><MdShoppingCart className='shoppingCart'></MdShoppingCart> Your cart</h3>
+                    <Button variant='danger' className='removeButton' onClick={()=>removeItem()}>Clear cart</Button>
+
                     {product.map((item, idx)=>
                     <div className='yourCart' key={idx}>
                         <hr></hr>
@@ -86,10 +87,10 @@ function Index()
                             <img src ={item.image}></img>
                             <h3 className='burgerTitle'>{item.name}</h3>
                             <h4><strong>$ {item.price}.00</strong></h4>
-                            <Button variant='warning' className='removeButton' onClick={()=>removeItem(idx)}>Remove</Button>
                         </div>
                         <br></br>
                   </div>)}
+
                     </div>
                 </div>
             </div>
@@ -98,23 +99,32 @@ function Index()
                     <Navbar.Brand>Home</Navbar.Brand>
                         
                         <Nav className='ml-auto'>
-                            <LinkContainer to='/cart' className='goToCartPage'>
-                                <Nav.Link>
-                                    <MdShoppingCart></MdShoppingCart>
-                                </Nav.Link>
-                            </LinkContainer>
+
                             <span className='showSideBar' onClick={showSideMenu}>
                                 <MdLineWeight></MdLineWeight>
-                            </span>       
+                            </span>
+                                   
                         </Nav>
+                        <div className='itemsContainer' onClick={showSideMenu}>
+                            <MdShoppingCart></MdShoppingCart>
+                            <span className='showItems'>
+                                <span className='showItemsText'>0</span>
+                            </span>
+                        </div>
                 </Navbar>
+
                 <div className='foodList'>
                   {item.map((item, idx)=>
                   <div className={item.name} key={idx}>
                         <img src ={item.image}></img>
                         <h3 className='burgerTitle'>{item.name}</h3>
                         <h4><strong>$ {item.price}.00</strong></h4>
-                        <Button variant='warning' className ='purchaseButton' onClick={()=>addToCart(item)} key={idx} ><strong><MdShoppingCart></MdShoppingCart>Add to cart</strong></Button>
+                        <Button variant='warning' className ='purchaseButton' onClick={()=>addToCart(item)} key={idx}>
+                            <strong>
+                                <MdShoppingCart></MdShoppingCart>
+                                Add to cart
+                            </strong>
+                        </Button>
                         <br></br>
                   </div>)}
                 </div>
