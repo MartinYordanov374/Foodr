@@ -55,8 +55,8 @@ function Index()
     }
     const removeItem=(id)=>
     {
-        const index = product.findIndex(prod => prod.id === id); //use id instead of index
-        if (index > -1) { //make sure you found it
+        const index = product.findIndex(prod => prod.id === id); 
+        if (index > -1) { 
             setProduct(prevState => prevState.splice(index, 1));
     }   
 
