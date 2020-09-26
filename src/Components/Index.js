@@ -5,7 +5,8 @@ import {LinkContainer} from 'react-router-bootstrap'
 import {MdShoppingCart,MdClear, MdLineWeight, MdPhone, MdInfo} from 'react-icons/md'
 import $ from 'jquery'
 import './Index.css'
-
+import Burger from './Images/Burger.png'
+import Pizza from './Images/Pizza.png'
 function Index()
 {
     
@@ -22,7 +23,6 @@ function Index()
         id: 1,
         price: 20.00
     }])
-
     const showSideMenu=()=>
     {
         $('.sideMenu').css('width', '250px')
@@ -42,21 +42,26 @@ function Index()
     }
     const addToCart=(item)=>
     {
-        $('.showItems').text(product.length+1)
+        $('.showItems').text(product.length)
         setProduct([...product, item])
         localStorage.setItem('products', JSON.stringify(product))
         
     }
-    const removeItem=()=>
+    const clearCart=()=>
     {
         product = []
         $('.yourCart').hide()
         $('.showItems').text(product.length)
-
+    }
+    const removeItem=(id)=>
+    {
+        const index = product.findIndex(prod => prod.id === id); //use id instead of index
+        if (index > -1) { //make sure you found it
+            setProduct(prevState => prevState.splice(index, 1));
+    }   
 
 
     }
-
 
     return(
         <div>
@@ -78,15 +83,16 @@ function Index()
                     
                     <div>
                     <h3 className='sideMenuCart'><MdShoppingCart className='shoppingCart'></MdShoppingCart> Your cart</h3>
-                    <Button variant='danger' className='removeButton' onClick={()=>removeItem()}>Clear cart</Button>
+                    <Button variant='danger' className='removeButton' onClick={()=>clearCart()}>Clear cart</Button>
 
                     {product.map((item, idx)=>
                     <div className='yourCart' key={idx}>
                         <hr></hr>
-                        <div className={idx}>
+                        <div>
                             <img src ={item.image}></img>
                             <h3 className='burgerTitle'>{item.name}</h3>
                             <h4><strong>$ {item.price}.00</strong></h4>
+                            <Button variant='danger' onClick={()=>removeItem(item.id)}>Remove</Button>
                         </div>
                         <br></br>
                   </div>)}
@@ -127,6 +133,7 @@ function Index()
                         </Button>
                         <br></br>
                   </div>)}
+                  
                 </div>
                
             </div>
